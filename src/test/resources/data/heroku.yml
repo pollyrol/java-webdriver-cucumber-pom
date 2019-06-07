@@ -1,0 +1,12 @@
+position1: Senior Automation Engineer
+firstName: FirstName
+lastName: LastName
+email: someone_else@gmail.com
+password: "123456"
+summary: QA Engineer, who learned from the best. Also I'd put pretty long text here to check if the character limitation matches the requirements.
+street: 4970 El Camino Real
+city: Los Altos
+zip: "94022"
+state: CA
+
+position2: VP, Development
