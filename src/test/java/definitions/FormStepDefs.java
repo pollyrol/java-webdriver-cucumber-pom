@@ -10,11 +10,6 @@ import pages.SampleResult;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FormStepDefs {
-    @Given("^I open sample form$")
-    public void iOpenSampleForm() throws Throwable {
-        new SampleForm().open();
-    }
-
     @And("^I fill out sample fields$")
     public void iFillOutSampleFields() throws Throwable {
         SampleForm form = new SampleForm();

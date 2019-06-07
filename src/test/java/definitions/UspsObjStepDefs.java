@@ -12,19 +12,6 @@ import pages.UspsPostalStore;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UspsObjStepDefs {
-    @Given("^I open \"([^\"]*)\" page$")
-    public void iOpenPage(String page) {
-        switch (page) {
-            case "usps":
-                new UspsHome().open();
-                break;
-            case "sample":
-                new SampleForm().open();
-                break;
-            default:
-                throw new RuntimeException("Unrecognized page " + page);
-        }
-    }
 
     @When("^I go to \"([^\"]*)\"$")
     public void iGoTo(String link) throws Throwable {
