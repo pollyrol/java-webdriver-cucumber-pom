@@ -12,8 +12,11 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = {"definitions", "support"}//,
 //        tags = {"@predefined1"} // same as VM option -Dcucumber.options="--tags @predefined1"
+//        tags = {"@predefined1 and @predefined2"} // same as VM option -Dcucumber.options="--tags @predefined1"
 )
+
 public class TestRunner {
+
     @BeforeClass
     public static void setup() {
         System.out.println("BeforeAll");
