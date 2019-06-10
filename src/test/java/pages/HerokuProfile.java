@@ -44,11 +44,15 @@ public class HerokuProfile extends Page
   }
   
   public void carreersClick() {
-    carreersBtn.click();
+    click(carreersBtn);
   }
   
   public void myJobsClick() {
-    myCareers.click();
+      click(myCareers);
+  }
+
+  public void rectuitBtnClick() {
+      click(recruitBtn);
   }
 
 }

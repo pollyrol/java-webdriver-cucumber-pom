@@ -20,6 +20,7 @@ public class HerokuStepDefs extends Page {
     HerokuPosition position = new HerokuPosition();
     HerokuNewPosition newPosition = new HerokuNewPosition();
     HerokuLogin login = new HerokuLogin();
+    HerokuRecruit recruit = new HerokuRecruit();
   
   public HerokuStepDefs() {}
   
@@ -86,8 +87,13 @@ public class HerokuStepDefs extends Page {
     @When("^I create \"([^\"]*)\" position$")
     public void iCreatePosition(String position) throws FileNotFoundException {
       HashMap<String, String> data = TestContext.getData("herokuData");
-
-
+      profile.rectuitBtnClick();
+      recruit.newPositionClick();
       newPosition.fillNewPositionFields();
+    }
+
+    @And("^I verify position created$")
+    public void iVerifyPositionCreated() throws FileNotFoundException {
+      assertTrue(recruit.isDisplayed());
     }
 }

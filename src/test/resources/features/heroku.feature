@@ -16,7 +16,7 @@
       Then I verify "candidate" login
       When I apply for a new job
       And I wait for 3 sec
-#      And I see position in my jobs
+      And I see position in my jobs
 
     @heroku3
     Scenario: Recruiter create a job
@@ -24,5 +24,5 @@
       And I login as "recruiter"
       Then I verify "recruiter" login
       When I create "automation" position
-#      And I verify position created
+      And I verify position created
 
