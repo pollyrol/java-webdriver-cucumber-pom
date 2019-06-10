@@ -41,6 +41,10 @@ public class Page {
         }
     }
 
+    protected boolean isVisible(WebElement pElement){
+        return pElement.isDisplayed();
+    }
+
     private void waitForClickable(WebElement element) {
         getWait().until(ExpectedConditions.elementToBeClickable(element));
     }

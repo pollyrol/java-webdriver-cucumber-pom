@@ -19,7 +19,7 @@ public class CommonStepDefs {
                 new CareersHome().open();
                 break;
             default:
-                throw new RuntimeException("Unrecognized page " + page);
+                throw new RuntimeException("Unrecognized page: " + page);
         }
     }
 }
