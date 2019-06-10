@@ -5,9 +5,11 @@ import pages.CareersHome;
 import pages.SampleForm;
 import pages.UspsHome;
 
+import java.io.FileNotFoundException;
+
 public class CommonStepDefs {
     @Given("^I open \"([^\"]*)\" page$")
-    public void iOpenPage(String page) {
+    public void iOpenPage(String page) throws FileNotFoundException {
         switch (page) {
             case "usps":
                 new UspsHome().open();

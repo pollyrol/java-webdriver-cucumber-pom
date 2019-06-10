@@ -12,39 +12,46 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class CareersStepDefs {
     @And("^I login as \"([^\"]*)\"$")
     public void iLoginAs(String role) throws Throwable {
-
-        new CareersHome().
+        switch (role){
+            case ("recruiter"):
+                new CareersHome().
                 clickLogin().
-                fillUsername("owen@example.com").
-                fillPassword("welcome").
+                loginFromFile().
                 submit();
+            break;
+            default:
+                throw new RuntimeException("Unrecognized credentials " + role);
+        }
     }
 
-    @Then("^I verify \"([^\"]*)\" login$")
-    public void iVerifyLogin(String arg0) throws Throwable {
 
-        assertThat(new CareersHome().getName()).isNotEmpty();
+
+    @Then("^I verify \"([^\"]*)\" login$")
+    public void iVerifyLogin(String value) throws Throwable {
+
+        assertThat(value).containsIgnoringCase(new CareersHome().getButtonName());
+
     }
 
     @When("^I create \"([^\"]*)\" requisition$")
-    public void iCreateRequisition(String arg0) throws Throwable {
+    public void iCreateRequisition(String role) throws Throwable {
         new CareersHome().
                 clickRecriut().
                 clickNewPosition();
-        new CareersOpenPosition().
-                fillTitle("SDET").
-                fillDescription("Automation engineer end test").
-                fillAddress("123 El Camino").
-                fillCity("Los Altos").
-                fillZip("94020").
-                fillDateOpen("08/08/2019").
-                getFoundItem("California").
-                clickSubmit();
-
+        switch (role){
+            case ("automation"):
+                new CareersOpenPosition().
+                        fillFormFromFile();
+                break;
+            default:
+                throw new RuntimeException("Unrecognized credentials " + role);
+        }
+        new CareersOpenPosition().clickSubmit();
     }
 
+
     @And("^I verify position created$")
-    public void iVerifyPositionCreated() {
+    public void iVerifyPositionCreated() throws InterruptedException {
         CareersRecruitForm form = new CareersRecruitForm();
         assertThat(form.getAllPositionsList()).contains("SDET");
     }

@@ -4,7 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static support.TestContext.getDriver;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+
+import static support.TestContext.*;
 
 public class CareersOpenPosition extends Page {
     @FindBy(xpath = "//label[contains(text(),'Title')]/following-sibling::input")
@@ -30,6 +33,30 @@ public class CareersOpenPosition extends Page {
 
     @FindBy(xpath = "//button[@id='positionSubmit']")
     private WebElement submit;
+
+    public CareersOpenPosition() throws FileNotFoundException {
+    }
+
+    private WebElement getState(String a) {
+        return getDriver().findElement(By.xpath("//label[contains(text(),'State')]/following-sibling::select//option[text()='" + a + "']"));
+    }
+
+
+    HashMap<String, String> send = getAutomation();
+
+
+
+    public CareersOpenPosition fillFormFromFile() throws InterruptedException {
+        title.sendKeys(send.get("Title"));
+        description.sendKeys(send.get("Description"));
+        address.sendKeys(send.get("Address"));
+        city.sendKeys(send.get("City"));
+        zip.sendKeys(send.get("Zip code"));
+        dateOpen.sendKeys(send.get("Date open"));
+        getState(send.get("State")).click();
+        return this;
+    }
+
 
     public CareersOpenPosition fillTitle(String value){
         title.sendKeys(value);
