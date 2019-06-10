@@ -45,6 +45,14 @@ public class TestContext {
         return getData("receiver");
     }
 
+    public static HashMap<String, String> getUser() throws FileNotFoundException {
+        return getData("user");
+    }
+
+    public static HashMap<String, String> getPosition() throws FileNotFoundException {
+        return getData("position");
+    }
+
     private static HashMap<String, String> getData(String fileName) throws FileNotFoundException {
         String path = System.getProperty("user.dir") + "/src/test/resources/data/" + fileName + ".yml";
         File file = new File(path);
