@@ -1,7 +1,7 @@
 position1: Senior Automation Engineer
 firstName: FirstName
 lastName: LastName
-email: someone_else@gmail.com
+email: someone_else_again@gmail.com
 password: "123456"
 summary: QA Engineer, who learned from the best. Also I'd put pretty long text here to check if the character limitation matches the requirements.
 street: 4970 El Camino Real
@@ -13,10 +13,3 @@ position2: VP, Development
 
 recruiterLogin: owen@example.com
 recruiterPassword: welcome
-
-positionTitle: Guru Pikapa
-positionDescription: Just be yourself
-positionAddress: 4970 El Camino Real
-positionCity: Los Altos
-positionState: CA
-positionZip: "94022"

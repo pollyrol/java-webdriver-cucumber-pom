@@ -20,6 +20,7 @@ public class Page {
     public String getUrl() {
         return url;
     }
+
     public void setUrl(String url) {
         this.url = url;
     }
@@ -44,6 +45,4 @@ public class Page {
     private void waitForClickable(WebElement element) {
         getWait().until(ExpectedConditions.elementToBeClickable(element));
     }
-
-
 }
