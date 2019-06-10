@@ -4,6 +4,12 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.yaml.snakeyaml.Yaml;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.HashMap;
 
 import static support.TestContext.getDriver;
 import static support.TestContext.getExecutor;
@@ -20,6 +26,7 @@ public class Page {
     public String getUrl() {
         return url;
     }
+
     public void setUrl(String url) {
         this.url = url;
     }
@@ -43,6 +50,12 @@ public class Page {
 
     protected boolean isVisible(WebElement pElement){
         return pElement.isDisplayed();
+    }
+
+    public HashMap<String, String> loadYamlData(String filename) throws FileNotFoundException{
+        Yaml yaml = new Yaml();
+        InputStream datafileReader = new FileInputStream(new File(System.getProperty("user.dir") + "/src/test/resources/data/" + filename));
+        return yaml.load(datafileReader);
     }
 
     private void waitForClickable(WebElement element) {

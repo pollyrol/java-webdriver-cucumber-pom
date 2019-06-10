@@ -3,15 +3,9 @@ package definitions;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.yaml.snakeyaml.Yaml;
-import pages.CareersHome;
-import pages.CareersNewPosition;
-import pages.CareersPosition;
-import pages.CareersRecruit;
-
+import pages.*;
 import java.io.*;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,14 +19,11 @@ public class CareersStepDefs {
 
     @And("^I login as \"([^\"]*)\"$")
     public void iLoginAs(String userType) throws FileNotFoundException{
-        Yaml yaml = new Yaml();
-        InputStream datafileReader;
         HashMap<String, String> userdata;
 
         switch (userType){
             case "recruiter":
-                datafileReader = new FileInputStream(new File(System.getProperty("user.dir") + "/src/test/resources/data/recruiter.yml"));
-                userdata = yaml.load(datafileReader);
+                userdata = new Page().loadYamlData("recruiter.yml");
                 new CareersHome().clickLogin().fillUsername(userdata.get("username")).fillPassword(userdata.get("password")).submit();
                 break;
             default:
@@ -44,14 +35,11 @@ public class CareersStepDefs {
     @Then("^I verify \"([^\"]*)\" login$")
     public void iVerifyLogin(String userType) throws FileNotFoundException{
         CareersHome careersHome = new CareersHome();
-        Yaml yaml = new Yaml();
-        InputStream datafileReader;
         HashMap<String, String> userdata;
 
         switch (userType){
             case "recruiter":
-                datafileReader = new FileInputStream(new File(System.getProperty("user.dir") + "/src/test/resources/data/recruiter.yml"));
-                userdata = yaml.load(datafileReader);
+                userdata = careersHome.loadYamlData("recruiter.yml");
                 assertThat(userdata.get("name")).isEqualToIgnoringCase(careersHome.getFullName().trim());
                 assertThat(careersHome.recruitButtonPresent());
                 break;
@@ -65,14 +53,11 @@ public class CareersStepDefs {
     public void iCreateRequisition(String positionName) throws FileNotFoundException{
         position = positionName;
         CareersNewPosition newPosition = new CareersHome().clickRecruit().clickNewPosition();
-        Yaml yaml = new Yaml();
-        InputStream datafileReader;
         HashMap<String, String> userdata;
 
         switch (position){
             case "automation":
-                datafileReader = new FileInputStream(new File(System.getProperty("user.dir") + "/src/test/resources/data/automation.yml"));
-                userdata = yaml.load(datafileReader);
+                userdata = newPosition.loadYamlData("automation.yml");
                 newPosition.fillTitle(userdata.get("title")).fillDescription(userdata.get("description")).fillAddress(userdata.get("address"))
                         .fillCity(userdata.get("city")).fillState(userdata.get("state")).fillZipcode(userdata.get("zipcode"))
                         .selectDateOpenAsToday().clickSubmit();
@@ -86,14 +71,11 @@ public class CareersStepDefs {
     @Then("^I verify position created$")
     public void iVerifyPositionCreated() throws FileNotFoundException{
         CareersPosition positionPage;
-        Yaml yaml = new Yaml();
-        InputStream datafileReader;
         HashMap<String, String> userdata;
 
         switch (position){
             case "automation":
-                datafileReader = new FileInputStream(new File(System.getProperty("user.dir") + "/src/test/resources/data/automation.yml"));
-                userdata = yaml.load(datafileReader);
+                userdata = new Page().loadYamlData("automation.yml");
                 positionPage = new CareersRecruit().clickPosition(userdata.get("title"));
                 assertThat(positionPage.readTitle()).isEqualToIgnoringCase(userdata.get("title"));
                 assertThat(positionPage.readDescription()).isEqualToIgnoringCase(userdata.get("description"));
