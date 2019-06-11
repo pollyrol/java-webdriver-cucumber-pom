@@ -23,7 +23,7 @@ public class CareersStepDefs {
 
         switch (userType){
             case "recruiter":
-                userdata = new Page().loadYamlData("recruiter.yml");
+                userdata = Page.loadYamlData("recruiter.yml");
                 new CareersHome().clickLogin().fillUsername(userdata.get("username")).fillPassword(userdata.get("password")).submit();
                 break;
             default:
@@ -39,7 +39,7 @@ public class CareersStepDefs {
 
         switch (userType){
             case "recruiter":
-                userdata = careersHome.loadYamlData("recruiter.yml");
+                userdata = Page.loadYamlData("recruiter.yml");
                 assertThat(userdata.get("name")).isEqualToIgnoringCase(careersHome.getFullName().trim());
                 assertThat(careersHome.recruitButtonPresent());
                 break;
@@ -57,7 +57,7 @@ public class CareersStepDefs {
 
         switch (position){
             case "automation":
-                userdata = newPosition.loadYamlData("automation.yml");
+                userdata = Page.loadYamlData("automation.yml");
                 newPosition.fillTitle(userdata.get("title")).fillDescription(userdata.get("description")).fillAddress(userdata.get("address"))
                         .fillCity(userdata.get("city")).fillState(userdata.get("state")).fillZipcode(userdata.get("zipcode"))
                         .selectDateOpenAsToday().clickSubmit();
@@ -75,7 +75,7 @@ public class CareersStepDefs {
 
         switch (position){
             case "automation":
-                userdata = new Page().loadYamlData("automation.yml");
+                userdata = Page.loadYamlData("automation.yml");
                 positionPage = new CareersRecruit().clickPosition(userdata.get("title"));
                 assertThat(positionPage.readTitle()).isEqualToIgnoringCase(userdata.get("title"));
                 assertThat(positionPage.readDescription()).isEqualToIgnoringCase(userdata.get("description"));

@@ -52,7 +52,7 @@ public class Page {
         return pElement.isDisplayed();
     }
 
-    public HashMap<String, String> loadYamlData(String filename) throws FileNotFoundException{
+    public static HashMap<String, String> loadYamlData(String filename) throws FileNotFoundException{
         Yaml yaml = new Yaml();
         InputStream datafileReader = new FileInputStream(new File(System.getProperty("user.dir") + "/src/test/resources/data/" + filename));
         return yaml.load(datafileReader);
