@@ -45,5 +45,9 @@ public class Page {
         getWait().until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    protected void waitForText(WebElement element, String text) {
+        getWait().until(ExpectedConditions.textToBePresentInElement(element, text));
+    }
+
 
 }
