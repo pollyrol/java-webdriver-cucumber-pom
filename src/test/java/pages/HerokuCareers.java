@@ -30,7 +30,7 @@ public class HerokuCareers extends Page {
     {
         loginBtn.click();
     }
-    
+
     public void positionClick(String scenario) {
         switch (scenario) {
             case "logged in":

@@ -38,8 +38,6 @@ public class HerokuNewCandidate extends Page {
   
   public void fillRequiredFields(HashMap hashMap) throws FileNotFoundException {
 
-    //Map <string, String>
-
     firstNameField.sendKeys(getData("heroku").get("firstName"));
     lastNameField.sendKeys(getData("heroku").get("lastName"));
     emailField.sendKeys(getData("heroku").get("email"));
@@ -54,8 +52,6 @@ public class HerokuNewCandidate extends Page {
     zipField.sendKeys(getData("heroku").get("zip"));
   }
   
-  public void submitClick()
-  {
-    submitBtn.click();
-  }
+  public void submitClick()  { submitBtn.click(); }
+
 }

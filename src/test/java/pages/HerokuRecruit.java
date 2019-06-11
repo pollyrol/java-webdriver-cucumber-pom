@@ -20,7 +20,7 @@ public class HerokuRecruit extends Page {
     }
 
     public boolean isDisplayed() throws FileNotFoundException {
-        return positionsList.getText().contains(getData("herokuData").get("positionTitle"));
+        return positionsList.getText().contains(getData("heroku").get("positionTitle"));
     }
 
 
