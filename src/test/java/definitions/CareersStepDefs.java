@@ -11,16 +11,20 @@ import pages.CareersHome;
 import pages.CareersOpenPosition;
 import pages.CareersRecruit;
 
+import java.util.HashMap;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static support.TestContext.getAutomation;
 import static support.TestContext.getDriver;
+import static support.TestContext.getRecruiter;
 
 public class CareersStepDefs {
     @And("^I login as \"([^\"]*)\"$")
     public void iLoginAs(String role) throws Throwable {
         new CareersHome().
                 clickLogin().
-                fillUsername("owen@example.com").
-                fillPassword("welcome").
+                fillUsername(getRecruiter().get("email")).
+                fillPassword(getRecruiter().get("password")).
                 submit();
     }
 
@@ -32,20 +36,27 @@ public class CareersStepDefs {
 
     @When("^I create \"([^\"]*)\" requisition$")
     public void iCreateRequisition(String arg0) throws Throwable {
+        HashMap<String, String> automation = getAutomation();
+        String title = automation.get("title");
+        String description = automation.get("description");
+        String street = automation.get("street");
+        String city = automation.get("city");
+        String stateValue = automation.get("stateValue");
+        String zip = automation.get("zip");
+
         new CareersHome().clickRecruit();
         new CareersRecruit().clickNewPosition();
-        new CareersOpenPosition().fillNewPosition();
-//        Thread.sleep(6000);
+        new CareersOpenPosition().fillNewPosition(title, description,  street, city, stateValue, zip);
     }
 
     @And("^I verify position created$")
     public void iVerifyPositionCreated() throws Throwable {
         new CareersRecruit().clickCareers();
         String actualResult = new CareersHome().getLastElement().getText();
-        assertThat(actualResult).contains("Software Development Engineer in Test");
-        assertThat(actualResult).contains("This position will work closely with QA");
-        assertThat(actualResult).contains("4970 El Camino Real");
-        assertThat(actualResult).contains("Los Altos");
-        assertThat(actualResult).contains("94022");
+        assertThat(actualResult).contains(getAutomation().get("title"));
+        assertThat(actualResult).contains(getAutomation().get("description"));
+        assertThat(actualResult).contains(getAutomation().get("street"));
+        assertThat(actualResult).contains(getAutomation().get("state"));
+        assertThat(actualResult).contains(getAutomation().get("zip"));
     }
 }

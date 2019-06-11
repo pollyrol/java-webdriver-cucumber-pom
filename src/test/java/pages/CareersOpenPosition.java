@@ -34,7 +34,7 @@ public class CareersOpenPosition extends Page {
     @FindBy(xpath = "//button[@id='positionSubmit']")
     private WebElement positionSubmit;
 
-    public CareersOpenPosition fillNewPosition() {
+    public CareersOpenPosition fillNewPosition(String title, String description, String street, String city, String state, String zip) {
         positionTitle.sendKeys("Software Development Engineer in Test");
         positionDescr.sendKeys("This position will work closely with QA and developer teams to build a variety of test automation tools. Your tools will help to find, debug, isolate and resolve defects. You will be working in a collaborative environment with a focus on quality to ensure the delivery of high-quality distributed applications to our customers.");
         positionAddress.sendKeys("4970 El Camino Real");
