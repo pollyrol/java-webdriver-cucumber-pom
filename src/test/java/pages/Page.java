@@ -52,12 +52,6 @@ public class Page {
         return pElement.isDisplayed();
     }
 
-    public static HashMap<String, String> loadYamlData(String filename) throws FileNotFoundException{
-        Yaml yaml = new Yaml();
-        InputStream datafileReader = new FileInputStream(new File(System.getProperty("user.dir") + "/src/test/resources/data/" + filename));
-        return yaml.load(datafileReader);
-    }
-
     private void waitForClickable(WebElement element) {
         getWait().until(ExpectedConditions.elementToBeClickable(element));
     }
