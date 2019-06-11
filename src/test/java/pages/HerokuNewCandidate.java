@@ -7,8 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import support.TestContext;
 
-public class HerokuNewCandidate extends Page
-{
+import static support.TestContext.getData;
+
+public class HerokuNewCandidate extends Page {
+
   @FindBy(xpath="//label[@for='candidateFirstName']/../input")
   private WebElement firstNameField;
   @FindBy(xpath="//label[@for='candidateLastName']/../input")
@@ -34,21 +36,22 @@ public class HerokuNewCandidate extends Page
   
   public HerokuNewCandidate() {}
   
-  public void fillRequiredFields(HashMap hashMap)
-    throws FileNotFoundException
-  {
-    firstNameField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("firstName") });
-    lastNameField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("lastName") });
-    emailField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("email") });
-    passwordField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("password") });
-    confirmPasswordField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("password") });
-    summaryField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("summary") });
-    streetField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("street") });
-    cityField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("city") });
+  public void fillRequiredFields(HashMap hashMap) throws FileNotFoundException {
+
+    //Map <string, String>
+
+    firstNameField.sendKeys(getData("heroku").get("firstName"));
+    lastNameField.sendKeys(getData("heroku").get("lastName"));
+    emailField.sendKeys(getData("heroku").get("email"));
+    passwordField.sendKeys(getData("heroku").get("password"));
+    confirmPasswordField.sendKeys(getData("heroku").get("password"));
+    summaryField.sendKeys(getData("heroku").get("summary"));
+    streetField.sendKeys(getData("heroku").get("street"));
+    cityField.sendKeys(getData("heroku").get("city"));
     
-    new Select(stateDropdown).selectByValue((String)TestContext.getData("herokuData").get("state"));
+    new Select(stateDropdown).selectByValue(getData("heroku").get("state"));
     
-    zipField.sendKeys(new CharSequence[] { (CharSequence)TestContext.getData("herokuData").get("zip") });
+    zipField.sendKeys(getData("heroku").get("zip"));
   }
   
   public void submitClick()

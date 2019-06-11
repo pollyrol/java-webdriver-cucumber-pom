@@ -6,14 +6,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class HerokuCareers extends Page {
 
+    //TODO: rewrite using cascade approach
+
     public HerokuCareers() {
         setUrl("https://skryabin-careers.herokuapp.com");
     }
 
     @FindBy(xpath="//*[@class='position-name'][text()='Senior Automation Engineer']")
     private WebElement position1;
-  
-
 
     @FindBy(xpath="//*[@class='position-name'][text()='VP, Development']")
     private WebElement position2;
@@ -23,9 +23,14 @@ public class HerokuCareers extends Page {
   
     public void positionCLick()
   {
-    clickWithJS(position1);
+    click(position1);
   }
-  
+
+    public void loginBtnClick()
+    {
+        loginBtn.click();
+    }
+    
     public void positionClick(String scenario) {
         switch (scenario) {
             case "logged in":
@@ -37,9 +42,6 @@ public class HerokuCareers extends Page {
     }
   }
   
-  public void loginBtnClick()
-  {
-    loginBtn.click();
-  }
+
 
 }
