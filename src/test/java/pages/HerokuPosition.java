@@ -13,18 +13,16 @@ public class HerokuPosition extends Page
   
   public HerokuPosition() {}
   
-  public void applyBtnClick()
-  {
-    clickWithJS(applyBtnFooter);
-  }
+  public void applyBtnClick() { click(applyBtnFooter); }
   
   public void applyBtnClick(String scenario) {
     switch (scenario.toLowerCase()) {
     case "logged in": 
-      applyBtnLoggedIn.click();
+      click(applyBtnLoggedIn);
       break;
     case "not logged in": 
-      applyBtnFooter.click();
+      click(applyBtnFooter);
+      break;
     }
   }
 }
