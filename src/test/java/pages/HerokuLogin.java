@@ -19,8 +19,8 @@ public class HerokuLogin extends Page {
   public HerokuLogin() {}
   
   public void fillRequiredFields(HashMap hashMap) throws FileNotFoundException {
-    usernameField.sendKeys(getData("herokuData").get("email"));
-    passwordField.sendKeys(getData("herokuData").get("password"));
+    usernameField.sendKeys(getData("heroku").get("email"));
+    passwordField.sendKeys(getData("heroku").get("password"));
   }
 
   public void submitClick() {
@@ -28,8 +28,8 @@ public class HerokuLogin extends Page {
   }
 
   public void fillRecruiterFields(HashMap hashMap) throws FileNotFoundException {
-    usernameField.sendKeys(getData("herokuData").get("recruiterLogin"));
-    passwordField.sendKeys(getData("herokuData").get("recruiterPassword"));
+    usernameField.sendKeys(getData("heroku").get("recruiterLogin"));
+    passwordField.sendKeys(getData("heroku").get("recruiterPassword"));
   }
 
 

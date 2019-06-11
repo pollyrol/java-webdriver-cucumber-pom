@@ -16,17 +16,18 @@ public class HerokuStepDefs extends Page {
 
     HerokuCareers herokuHome = new HerokuCareers();
     HerokuNewCandidate newCandidate = new HerokuNewCandidate();
-    HerokuProfile profile = new HerokuProfile();
     HerokuPosition position = new HerokuPosition();
     HerokuNewPosition newPosition = new HerokuNewPosition();
     HerokuLogin login = new HerokuLogin();
     HerokuRecruit recruit = new HerokuRecruit();
+    HerokuProfile profile = new HerokuProfile();
+   // HerokuMyJobs myJobs = new HerokuMyJobs();
   
   public HerokuStepDefs() {}
   
   @And("^I apply to a new position$")
   public void iApplyToANewPosition() throws FileNotFoundException, InterruptedException {
-    HashMap<String, String> candidateData = TestContext.getData("herokuData");
+    HashMap<String, String> candidateData = TestContext.getData("heroku");
     herokuHome.positionCLick();
     position.applyBtnClick("not logged in");
     newCandidate.fillRequiredFields(candidateData);
@@ -40,7 +41,7 @@ public class HerokuStepDefs extends Page {
   
   @And("^I login as \"([^\"]*)\"$")
   public void iLoginAs(String loginOption) throws FileNotFoundException {
-    HashMap<String, String> inputData = TestContext.getData("herokuData");
+    HashMap<String, String> inputData = TestContext.getData("heroku");
     herokuHome.loginBtnClick();
     switch (loginOption) {
       case ("candidate"):
@@ -58,7 +59,7 @@ public class HerokuStepDefs extends Page {
   //TODO
   @And("^I see position in my jobs$")
   public void iSeePositionInMyJobs() throws FileNotFoundException {
-    HashMap<String, String> candidateData = TestContext.getData("herokuData");
+    HashMap<String, String> candidateData = TestContext.getData("heroku");
     profile.myJobsClick();
     profile.isShown((String)candidateData.get("position2"));
   }
@@ -78,7 +79,7 @@ public class HerokuStepDefs extends Page {
   
   @When("^I apply for a new job$")
   public void iApplyForANewJob() throws FileNotFoundException {
-    HashMap<String, String> candidateData = TestContext.getData("herokuData");
+    HashMap<String, String> candidateData = TestContext.getData("heroku");
     
     herokuHome.positionClick("logged in");
     position.applyBtnClick("logged in");
@@ -86,8 +87,8 @@ public class HerokuStepDefs extends Page {
 
     @When("^I create \"([^\"]*)\" position$")
     public void iCreatePosition(String position) throws FileNotFoundException {
-      HashMap<String, String> data = TestContext.getData("herokuData");
-      profile.rectuitBtnClick();
+      HashMap<String, String> data = TestContext.getData("heroku");
+      profile.recruitBtnClick();
       recruit.newPositionClick();
       newPosition.fillNewPositionFields();
     }

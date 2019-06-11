@@ -25,4 +25,3 @@
       Then I verify "recruiter" login
       When I create "automation" position
       And I verify position created
-
