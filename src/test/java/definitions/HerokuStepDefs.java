@@ -1,100 +1,78 @@
 package definitions;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
-
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.*;
-import support.TestContext;
-
 import static org.testng.Assert.assertTrue;
+import static support.TestContext.getData;
 
 public class HerokuStepDefs extends Page {
 
-    HerokuCareers herokuHome = new HerokuCareers();
-    HerokuNewCandidate newCandidate = new HerokuNewCandidate();
-    HerokuPosition position = new HerokuPosition();
-    HerokuNewPosition newPosition = new HerokuNewPosition();
-    HerokuLogin login = new HerokuLogin();
-    HerokuRecruit recruit = new HerokuRecruit();
-    HerokuProfile profile = new HerokuProfile();
-   // HerokuMyJobs myJobs = new HerokuMyJobs();
-  
-  public HerokuStepDefs() {}
-  
-  @And("^I apply to a new position$")
-  public void iApplyToANewPosition() throws FileNotFoundException, InterruptedException {
-    HashMap<String, String> candidateData = TestContext.getData("heroku");
-    herokuHome.positionCLick();
-    position.applyBtnClick("not logged in");
-    newCandidate.fillRequiredFields(candidateData);
-    newCandidate.submitClick();
-  }
-  
-  @Then("^I verify profile is created$")
-  public void iVerifyProfileIsCreated() throws FileNotFoundException {
-    assertTrue(profile.isElementExist("logout"));
-  }
-  
-  @And("^I login as \"([^\"]*)\"$")
-  public void iLoginAs(String loginOption) throws FileNotFoundException {
-    HashMap<String, String> inputData = TestContext.getData("heroku");
-    herokuHome.loginBtnClick();
-    switch (loginOption) {
-      case ("candidate"):
-        login.fillRequiredFields(inputData);
-        login.submitClick();
-        break;
-      case("recruiter"):
-        login.fillRecruiterFields(inputData);
-        login.submitClick();
-        break;
+    @And("^I apply to a new position$")
+    public void iApplyToANewPosition() throws FileNotFoundException {
+        HashMap<String, String> candidateData = getData("heroku");
+        new HerokuCareers().positionCLick().
+                applyBtnClick("not logged in");
+        new HerokuNewCandidate().fillRequiredFields(candidateData).
+                submitClick();
     }
 
-  }
-
-  //TODO
-  @And("^I see position in my jobs$")
-  public void iSeePositionInMyJobs() throws FileNotFoundException {
-    HashMap<String, String> candidateData = TestContext.getData("heroku");
-    profile.myJobsClick();
-    profile.isShown((String)candidateData.get("position2"));
-  }
-  
-  @Then("^I verify \"([^\"]*)\" login$")
-  public void iVerifyLogin(String role) throws FileNotFoundException {
-    switch (role) {
-      case("candidate"):
-        profile.isElementExist("name");
-        break;
-      case("recruiter"):
-        profile.isShown("recruiter");
-        break;
+    @Then("^I verify profile is created$")
+    public void iVerifyProfileIsCreated() throws FileNotFoundException {
+        assertTrue(new HerokuMyJobs().isElementExist("name"));
     }
 
-  }
-  
-  @When("^I apply for a new job$")
-  public void iApplyForANewJob() throws FileNotFoundException {
-    HashMap<String, String> candidateData = TestContext.getData("heroku");
-    
-    herokuHome.positionClick("logged in");
-    position.applyBtnClick("logged in");
-  }
+    @And("^I login as \"([^\"]*)\"$")
+    public void iLoginAs(String loginOption) throws FileNotFoundException {
+        HashMap<String, String> inputData = getData("heroku");
+        new HerokuCareers().loginBtnClick();
+        switch (loginOption.toLowerCase()) {
+            case ("candidate"):
+                new HerokuLogin().fillRequiredFields(inputData);
+                break;
+            case ("recruiter"):
+                new HerokuLogin().fillRecruiterFields(inputData);
+                break;
+        }
+        new HerokuLogin().submitClick();
+    }
+
+    //TODO
+    @And("^I see position in my jobs$")
+    public void iSeePositionInMyJobs() throws FileNotFoundException {
+        assertTrue(new HerokuMyJobs().isElementExist("job"));
+    }
+
+    @Then("^I verify \"([^\"]*)\" login$")
+    public void iVerifyLogin(String role) {
+        switch (role) {
+            case ("candidate"):
+                new HerokuCareers().isShown("candidate");
+                break;
+            case ("recruiter"):
+                new HerokuCareers().isShown("recruiter");
+                break;
+        }
+    }
+
+    @When("^I apply for a new job$")
+    public void iApplyForANewJob() {
+        new HerokuCareers().positionClick("logged in").
+                applyBtnClick("logged in");
+    }
 
     @When("^I create \"([^\"]*)\" position$")
     public void iCreatePosition(String position) throws FileNotFoundException {
-      HashMap<String, String> data = TestContext.getData("heroku");
-      profile.recruitBtnClick();
-      recruit.newPositionClick();
-      newPosition.fillNewPositionFields();
+        new HerokuCareers().recruitBtnClick();
+        new HerokuRecruit().newPositionClick();
+        new HerokuNewPosition().fillNewPositionFields();
     }
 
     @And("^I verify position created$")
     public void iVerifyPositionCreated() throws FileNotFoundException {
-      assertTrue(recruit.isDisplayed());
+        assertTrue(new HerokuRecruit().isDisplayed());
     }
 }
