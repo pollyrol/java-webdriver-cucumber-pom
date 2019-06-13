@@ -1,75 +1,49 @@
 package definitions;
 
-<<<<<<< HEAD
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.CareersHome;
-import pages.CareersOpenPosition;
-import pages.CareersRecruitForm;
+import pages.CareersRecruit;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-=======
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
-import pages.CareersHome;
->>>>>>> 17cfc0f5c4dda2d9035ba767beff4744bacf95d1
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static support.TestContext.getData;
 
 public class CareersStepDefs {
     @And("^I login as \"([^\"]*)\"$")
     public void iLoginAs(String role) throws Throwable {
-<<<<<<< HEAD
-        switch (role){
-            case ("recruiter"):
-                new CareersHome().
+        Map<String, String> recruiter = getData(role);
+        new CareersHome().
                 clickLogin().
-                loginFromFile().
+                fillUsername(recruiter.get("email")).
+                fillPassword(recruiter.get("password")).
                 submit();
-            break;
-            default:
-                throw new RuntimeException("Unrecognized credentials " + role);
-        }
+
     }
 
-
-
     @Then("^I verify \"([^\"]*)\" login$")
-    public void iVerifyLogin(String value) throws Throwable {
-
-        assertThat(value).containsIgnoringCase(new CareersHome().getButtonName());
-
+    public void iVerifyLogin(String role) throws Throwable {
+        String actualName = new CareersHome().getUserName();
+        String expectedName = getData(role).get("name");
+        assertThat(actualName).isEqualTo(expectedName);
     }
 
     @When("^I create \"([^\"]*)\" requisition$")
-    public void iCreateRequisition(String role) throws Throwable {
+    public void iCreateRequisition(String title) throws Throwable {
         new CareersHome().
-                clickRecriut().
-                clickNewPosition();
-        switch (role){
-            case ("automation"):
-                new CareersOpenPosition().
-                        fillFormFromFile();
-                break;
-            default:
-                throw new RuntimeException("Unrecognized credentials " + role);
-        }
-        new CareersOpenPosition().clickSubmit();
-    }
-
-
-    @And("^I verify position created$")
-    public void iVerifyPositionCreated() throws InterruptedException {
-        CareersRecruitForm form = new CareersRecruitForm();
-        assertThat(form.getAllPositionsList()).contains("SDET");
-    }
-}
-=======
-        new CareersHome().
-                clickLogin().
-                fillUsername("owen@example.com").
-                fillPassword("welcome").
+                clickRecruit().
+                clickNewPosition().
+                fillPosition(getData(title)).
                 submit();
+    }
 
+
+    @And("^I verify \"([^\"]*)\" position created$")
+    public void iVerifyPositionCreated(String title) throws Throwable {
+        String actualTitle = new CareersRecruit().getLastPositionTitle();
+        String expectedTitle = getData(title).get("title");
+        assertThat(actualTitle).isEqualTo(expectedTitle);
     }
 }
->>>>>>> 17cfc0f5c4dda2d9035ba767beff4744bacf95d1

@@ -3,22 +3,11 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-
-import static support.TestContext.getRecruiter;
-
 public class CareersHome extends Page {
 
-    public CareersHome() throws FileNotFoundException {
+    public CareersHome() {
         setUrl("https://skryabin-careers.herokuapp.com/");
     }
-
-    @FindBy(xpath = "//a[@href='/login']")
-    private WebElement loginButton;
-
-    @FindBy(xpath = "//a[contains(@href,'candidates')]")
-    private WebElement name;
 
     @FindBy(xpath = "//a[contains(@href,'recruit')]/button")
     private WebElement recruit;
@@ -26,15 +15,34 @@ public class CareersHome extends Page {
     @FindBy(xpath = "//a[contains(@href,'recruit')]/button")
     private WebElement buttonRecruit;
 
+    @FindBy(xpath = "//a[@href='/login']")
+    private WebElement loginButton;
+
+    @FindBy(xpath = "//span[@class='logout-box']/a")
+    private WebElement name;
+
+    @FindBy(xpath = "//a[@href='/recruit']")
+    private WebElement recruitButton;
+
+    public CareersRecruit clickRecruit() {
+        click(recruitButton);
+        return new CareersRecruit();
+    }
+
+    public CareersLogin clickLogin() {
+        click(loginButton);
+        return new CareersLogin();
+    }
+
+    public String getUserName() {
+        return name.getText();
+    }
+
 
     public String getButtonName(){
         return buttonRecruit.getText();
     }
 
-    public CareersLogin clickLogin() throws FileNotFoundException {
-        click(loginButton);
-        return new CareersLogin();
-    }
 
     public String getName(){
         return name.getText();

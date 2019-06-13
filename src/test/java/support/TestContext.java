@@ -3,7 +3,6 @@ package support;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -45,15 +44,7 @@ public class TestContext {
         return getData("receiver");
     }
 
-    public static HashMap<String, String> getRecruiter() throws FileNotFoundException {
-        return getData("recruiter");
-    }
-
-    public static HashMap<String, String> getAutomation() throws FileNotFoundException {
-        return getData("automation");
-    }
-
-    private static HashMap<String, String> getData(String fileName) throws FileNotFoundException {
+    public static HashMap<String, String> getData(String fileName) throws FileNotFoundException {
         String path = System.getProperty("user.dir") + "/src/test/resources/data/" + fileName + ".yml";
         File file = new File(path);
         FileInputStream stream = new FileInputStream(file);
