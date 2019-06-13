@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Map;
+
 public class CareersOpenPosition extends Page {
 
     @FindBy(xpath = "//label[@for='positionTitle']/../input")
@@ -32,19 +34,29 @@ public class CareersOpenPosition extends Page {
     private WebElement todayButton;
 
     @FindBy(xpath = "//button[@id='positionSubmit']")
-    private WebElement positionSubmit;
+    private WebElement submit;
 
-    public CareersOpenPosition fillNewPosition(String title, String description, String street, String city, String state, String zip) {
-        positionTitle.sendKeys("Software Development Engineer in Test");
-        positionDescr.sendKeys("This position will work closely with QA and developer teams to build a variety of test automation tools. Your tools will help to find, debug, isolate and resolve defects. You will be working in a collaborative environment with a focus on quality to ensure the delivery of high-quality distributed applications to our customers.");
-        positionAddress.sendKeys("4970 El Camino Real");
-        positionCity.sendKeys("Los Altos");
-        new Select(positionState).selectByValue("CA");
-        positionZip.sendKeys("94022");
-        click(positionDateOpen);
-        click(todayButton);
-        click(positionSubmit);
+    public CareersOpenPosition fillNewPosition(Map<String, String> position) {
+        positionTitle.sendKeys(position.get("title"));
+        positionDescr.sendKeys(position.get("description"));
+        positionAddress.sendKeys(position.get("street"));
+        positionCity.sendKeys(position.get("city"));
+        new Select(positionState).selectByValue(position.get("stateValue"));
+        positionZip.sendKeys(position.get("zip"));
+
+//        --- set any date ---
+        positionDateOpen.sendKeys(position.get("dateOpen"));
+
+//        --- set today date ---
+//        click(positionDateOpen);
+//        click(todayButton);
+
         return this;
+    }
+
+    public CareersRecruit submit() {
+        click(submit);
+        return new CareersRecruit();
     }
 
 }

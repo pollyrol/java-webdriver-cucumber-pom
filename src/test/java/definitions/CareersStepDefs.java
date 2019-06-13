@@ -14,49 +14,55 @@ import pages.CareersRecruit;
 import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static support.TestContext.getAutomation;
-import static support.TestContext.getDriver;
-import static support.TestContext.getRecruiter;
+import static support.TestContext.*;
 
 public class CareersStepDefs {
+
     @And("^I login as \"([^\"]*)\"$")
     public void iLoginAs(String role) throws Throwable {
+
         new CareersHome().
                 clickLogin().
-                fillUsername(getRecruiter().get("email")).
-                fillPassword(getRecruiter().get("password")).
+                fillUsername(getData(role).get("email")).
+                fillPassword(getData(role).get("password")).
                 submit();
     }
 
     @Then("^I verify \"([^\"]*)\" login$")
     public void iVerifyLogin(String role) throws Throwable {
-        WebElement actualUsername = new CareersHome().getUser("Owen");
-        assertThat(actualUsername.getText()).containsIgnoringCase("owen");
+
+        String actualUsername = new CareersHome().getUser();
+        assertThat(actualUsername).contains(getData(role).get("name"));
     }
 
     @When("^I create \"([^\"]*)\" requisition$")
-    public void iCreateRequisition(String arg0) throws Throwable {
-        HashMap<String, String> automation = getAutomation();
-        String title = automation.get("title");
-        String description = automation.get("description");
-        String street = automation.get("street");
-        String city = automation.get("city");
-        String stateValue = automation.get("stateValue");
-        String zip = automation.get("zip");
+    public void iCreateRequisition(String position) throws Throwable {
 
-        new CareersHome().clickRecruit();
-        new CareersRecruit().clickNewPosition();
-        new CareersOpenPosition().fillNewPosition(title, description,  street, city, stateValue, zip);
+        new CareersHome()
+                .clickRecruit()
+                .clickNewPosition()
+                .fillNewPosition(getData(position))
+                .submit();
     }
 
-    @And("^I verify position created$")
-    public void iVerifyPositionCreated() throws Throwable {
-        new CareersRecruit().clickCareers();
-        String actualResult = new CareersHome().getLastElement().getText();
-        assertThat(actualResult).contains(getAutomation().get("title"));
-        assertThat(actualResult).contains(getAutomation().get("description"));
-        assertThat(actualResult).contains(getAutomation().get("street"));
-        assertThat(actualResult).contains(getAutomation().get("state"));
-        assertThat(actualResult).contains(getAutomation().get("zip"));
+    @And("^I verify position \"([^\"]*)\" created$")
+    public void iVerifyPositionCreated(String position) throws Throwable {
+
+//        --- Slava's code ---
+        String actualTitle = new CareersRecruit().getLastPositionTitle();
+        String expectedTitle = getData(position).get("title");
+        assertThat(actualTitle).isEqualTo(expectedTitle);
+
+
+//        --- mine ---
+//        new CareersRecruit().clickCareers(); // Home page
+//        String actualResult = new CareersHome().getLastElement().getText();
+//        --- Assertions ---
+//        assertThat(actualResult).contains(getData(position).get("title"));
+//        assertThat(actualResult).contains(getData(position).get("description"));
+//        assertThat(actualResult).contains(getData(position).get("street"));
+//        assertThat(actualResult).contains(getData(position).get("state"));
+//        assertThat(actualResult).contains(getData(position).get("zip"));
+
     }
 }

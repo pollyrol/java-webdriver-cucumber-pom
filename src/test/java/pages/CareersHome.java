@@ -26,9 +26,8 @@ public class CareersHome extends Page {
         return new CareersLogin();
     }
 
-    public WebElement getUser(String userValue) {
-        waitForText(username, userValue);
-        return username;
+    public String getUser() {
+        return username.getText();
     }
 
     public CareersRecruit clickRecruit() {
@@ -37,7 +36,6 @@ public class CareersHome extends Page {
     }
 
     public WebElement getLastElement() {
-        waitForClickable().
         return lastElement;
     }
 }
