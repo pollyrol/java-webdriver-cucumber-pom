@@ -1,5 +1,6 @@
 package definitions;
 
+<<<<<<< HEAD
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -8,10 +9,16 @@ import pages.CareersOpenPosition;
 import pages.CareersRecruitForm;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+=======
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
+import pages.CareersHome;
+>>>>>>> 17cfc0f5c4dda2d9035ba767beff4744bacf95d1
 
 public class CareersStepDefs {
     @And("^I login as \"([^\"]*)\"$")
     public void iLoginAs(String role) throws Throwable {
+<<<<<<< HEAD
         switch (role){
             case ("recruiter"):
                 new CareersHome().
@@ -56,3 +63,13 @@ public class CareersStepDefs {
         assertThat(form.getAllPositionsList()).contains("SDET");
     }
 }
+=======
+        new CareersHome().
+                clickLogin().
+                fillUsername("owen@example.com").
+                fillPassword("welcome").
+                submit();
+
+    }
+}
+>>>>>>> 17cfc0f5c4dda2d9035ba767beff4744bacf95d1
