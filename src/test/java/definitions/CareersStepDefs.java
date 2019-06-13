@@ -8,65 +8,49 @@ import pages.CareersHome;
 import pages.CareersPositionDetails;
 import pages.CareersRecruit;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static support.TestContext.getData;
 
 public class CareersStepDefs {
     @And("^I login as \"([^\"]*)\"$")
     public void iLoginAs(String role) throws Throwable {
+        Map<String, String> recruiter = getData(role);
         new CareersHome().
                 clickLogin().
-                fillUsername().
-                fillPassword().
+                fillUsername(recruiter.get("email")).
+                fillPassword(recruiter.get("password")).
                 submit();
+
     }
 
     @Then("^I verify \"([^\"]*)\" login$")
-    public void iVerifyLogin(String name) throws Throwable {
-        CareersHome result = new CareersHome();
-        String actualResult = result.getNameRecruter();
-
-        assertThat(actualResult).contains("Owen Kelley");
+    public void iVerifyLogin(String role) throws Throwable {
+        String actualName = new CareersHome().getUserName();
+        String expectedName = getData(role).get("name");
+        assertThat(actualName).isEqualTo(expectedName);
     }
 
     @When("^I create \"([^\"]*)\" requisition$")
-    public void iCreateRequisition(String arg0) throws Throwable {
+    public void iCreateRequisition(String title) throws Throwable {
         new CareersHome().
                 clickRecruit().
                 clickNewPosition().
-                fillTitle().
-                fillDescription().
-                fillAddress().
-                fillCity().
-                selectState().
-                fillZip().
-                fillDate().
+                fillPosition(getData(title)).
                 submit();
 
 
     }
 
-    @And("^I verify position created$")
-    public void iVerifyPositionCreated() throws Throwable {
-
-        new CareersRecruit().textPosition().getTitle();
-        CareersPositionDetails result =  new CareersPositionDetails();
-
-        String actualResultTitle = result.getTitle();
-        String actualResultDescription = result.getDescription();
-        String actualResultAddress = result.getAddress();
-        String actualResultCity = result.getCity();
-        String actualResultState = result.getState();
-        String actualResultZip = result.getZip();
-        String actualResultDate = result.getDate();
-        Thread.sleep(3000);
-
-        assertThat(actualResultTitle).contains("SQA Engineer");
-        assertThat(actualResultDescription).contains("Java");
-        assertThat(actualResultAddress).contains("4970 El Camino Real");
-        assertThat(actualResultCity).contains("Los Altos");
-        assertThat(actualResultState).contains("California");
-        assertThat(actualResultZip).contains("94022");
 
 
+    @And("^I verify \"([^\"]*)\" position created$")
+    public void iVerifyPositionCreated(String title) throws Throwable {
+        String actualTitle = new CareersRecruit().getLastPositionTitle();
+        String expectedTitle = getData(title).get("title");
+        assertThat(actualTitle).isEqualTo(expectedTitle);
     }
+
+
 }

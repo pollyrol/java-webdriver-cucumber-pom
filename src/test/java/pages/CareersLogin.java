@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.io.FileNotFoundException;
 
-import static support.TestContext.getUser;
+
 
 public class CareersLogin extends Page {
 
@@ -19,13 +19,13 @@ public class CareersLogin extends Page {
     private WebElement submit;
 
 
-    public CareersLogin fillUsername() throws FileNotFoundException {
-        loginUsername.sendKeys(getUser().get("username"));
+    public CareersLogin fillUsername(String value) {
+        loginUsername.sendKeys(value);
         return this;
     }
 
-    public CareersLogin fillPassword() throws FileNotFoundException {
-        loginPassword.sendKeys(getUser().get("password"));
+    public CareersLogin fillPassword(String value) {
+        loginPassword.sendKeys(value);
         return this;
     }
 

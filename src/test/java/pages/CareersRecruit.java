@@ -19,12 +19,9 @@ public class CareersRecruit extends Page {
     })
     private List<WebElement> listOfPositions;
 
-    private int latest = listOfPositions.size() - 1;
-
-
-    public CareersPositionDetails textPosition() {
-        click(listOfPositions.get(latest));
-        return new CareersPositionDetails();
+    public String getLastPositionTitle() {
+        int indexOfLastElement = listOfPositions.size() - 1;
+        return listOfPositions.get(indexOfLastElement).getText();
     }
 
 

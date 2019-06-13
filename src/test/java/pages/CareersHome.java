@@ -19,13 +19,16 @@ public class CareersHome extends Page {
     @FindBy(xpath = "//button[contains(text(),'Recruit')]")
     private WebElement recruit;
 
+    @FindBy(xpath = "//a[contains(@href, 'new_candidate')]")
+    private WebElement apply;
+
 
     public CareersLogin clickLogin() {
         click(loginButton);
         return new CareersLogin();
     }
 
-    public String getNameRecruter() {
+    public String getUserName() {
         return nameRecruter.getText();
     }
 
