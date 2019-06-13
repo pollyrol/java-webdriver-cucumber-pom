@@ -2,9 +2,13 @@ package definitions;
 
 import cucumber.api.java.en.And;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.WebElement;
 import pages.*;
 import static org.testng.Assert.assertTrue;
 import static support.TestContext.getData;
@@ -73,6 +77,7 @@ public class HerokuStepDefs extends Page {
 
     @And("^I verify position created$")
     public void iVerifyPositionCreated() throws FileNotFoundException {
-        assertTrue(new HerokuRecruit().isDisplayed());
+        System.out.println("Expected: " + getData("heroku").get("positionTitle"));
+        assertTrue(new HerokuRecruit().lastAddedPosition().contains(getData("heroku").get("positionTitle")));
     }
 }
