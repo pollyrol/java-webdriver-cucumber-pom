@@ -3,11 +3,14 @@ package support;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.*;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
@@ -45,7 +48,7 @@ public class TestContext {
         return getData("receiver");
     }
 
-    private static HashMap<String, String> getData(String fileName) throws FileNotFoundException {
+    public static HashMap<String, String> getData(String fileName) throws FileNotFoundException {
         String path = System.getProperty("user.dir") + "/src/test/resources/data/" + fileName + ".yml";
         File file = new File(path);
         FileInputStream stream = new FileInputStream(file);
