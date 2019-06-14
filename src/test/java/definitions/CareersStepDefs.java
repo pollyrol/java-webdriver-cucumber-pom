@@ -7,9 +7,7 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.CareersHome;
-import pages.CareersOpenPosition;
-import pages.CareersRecruit;
+import pages.*;
 
 import java.util.HashMap;
 
@@ -58,11 +56,28 @@ public class CareersStepDefs {
 //        new CareersRecruit().clickCareers(); // Home page
 //        String actualResult = new CareersHome().getLastElement().getText();
 //        --- Assertions ---
-//        assertThat(actualResult).contains(getData(position).get("title"));
-//        assertThat(actualResult).contains(getData(position).get("description"));
-//        assertThat(actualResult).contains(getData(position).get("street"));
-//        assertThat(actualResult).contains(getData(position).get("state"));
-//        assertThat(actualResult).contains(getData(position).get("zip"));
 
     }
+
+    @And("^I apply to a new position$")
+    public void iApplyToANewPosition() throws Throwable {
+
+        new CareersHome()
+                .clickLastVisible()
+                .clickApply()
+                .fillApplyForm(getData("candidate"))
+                .clickSubmit();
+//        Thread.sleep(5000);
+
+    }
+
+    @Then("^I verify profile is created$")
+    public void iVerifyProfileIsCreated() throws Throwable {
+
+        String expectedUserName = getData("candidate").get("firstName") + " " + getData("candidate").get("lastName");
+        String actualUsername = new CareersMyJob().getUser();
+        assertThat(actualUsername).contains(getData(expectedUserName);
+    }
+
+
 }

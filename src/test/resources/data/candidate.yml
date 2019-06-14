@@ -1,0 +1,12 @@
+firstName: Jim
+lastName: Raynor
+email: raynor@example.com
+password: dominion
+summary: "Responsible for all builds and final approval on releases along with auditing and helping triage tickets and all TDD practices.
+          ● Managed and maintained release branches using GIT and bitbucket as Source control.
+          ● Acted as liaison between all departments and the tech/dev team to ensure adequate ticket support
+          ● Helped implement automation on every type of browser/OS along with on-staff SDET."
+address: "555 Wings of Liberty Ct #555"
+city: Korhal
+state: CA
+zip: "55555"

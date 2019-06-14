@@ -21,6 +21,9 @@ public class CareersHome extends Page {
     @FindBy(xpath = "//li[last()]")
     private WebElement lastElement;
 
+    @FindBy(xpath = "//li[contains(@style, 'z-index: 0;')]//h4")
+    private WebElement lastVisible;
+
     public CareersLogin clickLogin() {
         click(loginButton);
         return new CareersLogin();
@@ -38,4 +41,10 @@ public class CareersHome extends Page {
     public WebElement getLastElement() {
         return lastElement;
     }
+
+    public CareersPositionDetails clickLastVisible() {
+        click(lastVisible);
+        return new CareersPositionDetails();
+    }
+
 }

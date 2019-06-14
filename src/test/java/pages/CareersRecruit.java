@@ -24,6 +24,9 @@ public class CareersRecruit extends Page {
         return new CareersHome();
     }
 
+
+
+
 //    --- Slava's code ---
     @FindBy(xpath="//a[contains(@href, '/positions')]/h4")
     private List<WebElement> positions;

@@ -14,7 +14,7 @@ Feature: Careers project
         Given I open "careers" page
         And I apply to a new position
         Then I verify profile is created
-        And I see position in my jobs
+#        And I see position in my jobs
 
     @careers3
     Scenario: Careers adds new job
@@ -23,7 +23,8 @@ Feature: Careers project
         Then I verify "candidate" login
         When I apply for a new job
         Then I see position marked as applied
-        And I see position in my jobs
+        And I see position in my jobs (edited)
+
 
 
 
