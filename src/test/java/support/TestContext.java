@@ -45,7 +45,7 @@ public class TestContext {
         return getData("receiver");
     }
 
-    private static HashMap<String, String> getData(String fileName) throws FileNotFoundException {
+    public static HashMap<String, String> getData(String fileName) throws FileNotFoundException {
         String path = System.getProperty("user.dir") + "/src/test/resources/data/" + fileName + ".yml";
         File file = new File(path);
         FileInputStream stream = new FileInputStream(file);
