@@ -23,4 +23,4 @@ Feature: Careers project
     Then I verify "candidate" login
     When I apply for a new job
     Then I see position marked as applied
-    And I see position in my jobs (edited) 
+    And I see position in my jobs
