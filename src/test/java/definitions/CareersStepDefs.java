@@ -4,12 +4,9 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.By;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
-
-import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static support.TestContext.*;
@@ -31,6 +28,7 @@ public class CareersStepDefs {
 
         String actualUsername = new CareersHome().getUser();
         assertThat(actualUsername).contains(getData(role).get("name"));
+        Thread.sleep(5000);
     }
 
     @When("^I create \"([^\"]*)\" requisition$")
@@ -74,10 +72,29 @@ public class CareersStepDefs {
     @Then("^I verify profile is created$")
     public void iVerifyProfileIsCreated() throws Throwable {
 
-        String expectedUserName = getData("candidate").get("firstName") + " " + getData("candidate").get("lastName");
-        String actualUsername = new CareersMyJob().getUser();
-        assertThat(actualUsername).contains(getData(expectedUserName);
+        String actualUsername = new CareersMyJobs().getUser();
+        assertThat(actualUsername).contains(getData("candidate").get("name"));
     }
 
 
+    @And("^I see position in my jobs$")
+    public void iSeePositionInMyJobs() throws Throwable {
+        assertThat(
+                new CareersMyJobs()
+                    .getJobTitle()
+                    .isDisplayed()
+        ).isTrue();
+    }
+
+    @When("^I apply for a new job$")
+    public void iApplyForANewJob() throws Throwable {
+        new CareersHome()
+                .getNewJob()
+                .clickApply();
+    }
+
+    @Then("^I see position marked as applied$")
+    public void iSeePositionMarkedAsApplied() throws Throwable {
+        new CareersMyJobs().isPositionApplied();
+    }
 }

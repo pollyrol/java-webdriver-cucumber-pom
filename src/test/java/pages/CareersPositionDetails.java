@@ -9,6 +9,7 @@ public class CareersPositionDetails extends Page {
     private WebElement apply;
 
     public CareersApply clickApply() {
+        waitForClickable(apply);
         click(apply);
         return new CareersApply();
     }

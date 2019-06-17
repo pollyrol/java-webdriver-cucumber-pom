@@ -6,10 +6,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Map;
 
-import static support.TestContext.*;
-
-import static support.TestContext.getCandidate;
-
 public class CareersApply extends Page {
 
         @FindBy(xpath = "//label[@for='candidateFirstName']/../input")
@@ -60,9 +56,9 @@ public class CareersApply extends Page {
             return this;
         }
 
-        public CareersMyJob clickSubmit() {
+        public CareersMyJobs clickSubmit() {
             click(submit);
-            return new CareersMyJob;
+            return new CareersMyJobs();
         }
 
 

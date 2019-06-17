@@ -1,6 +1,7 @@
 firstName: Jim
 lastName: Raynor
-email: raynor@example.com
+name: Jim Raynor
+email: jim.raynor@mail.com
 password: dominion
 summary: "Responsible for all builds and final approval on releases along with auditing and helping triage tickets and all TDD practices.
           ● Managed and maintained release branches using GIT and bitbucket as Source control.
