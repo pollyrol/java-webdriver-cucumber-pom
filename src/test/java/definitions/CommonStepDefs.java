@@ -1,6 +1,7 @@
 package definitions;
 
 import cucumber.api.java.en.Given;
+import pages.CareersHome;
 import pages.SampleForm;
 import pages.UspsHome;
 
@@ -13,6 +14,9 @@ public class CommonStepDefs {
                 break;
             case "sample":
                 new SampleForm().open();
+                break;
+            case "careers":
+                new CareersHome().open();
                 break;
             default:
                 throw new RuntimeException("Unrecognized page " + page);
