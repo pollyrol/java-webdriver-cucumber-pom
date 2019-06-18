@@ -51,41 +51,6 @@ public class CareersNewPosition extends Page {
         return this;
     }
 
-//    public CareersNewPosition fillTitle() throws FileNotFoundException {
-//        title.sendKeys(getPosition().get("title"));
-//        return this;
-//    }
-//
-//    public CareersNewPosition fillDescription() throws FileNotFoundException {
-//        description.sendKeys(getPosition().get("description"));
-//        return this;
-//    }
-//
-//    public CareersNewPosition fillAddress() throws FileNotFoundException {
-//        address.sendKeys(getPosition().get("address"));
-//        return this;
-//    }
-//
-//    public CareersNewPosition fillCity() throws FileNotFoundException {
-//        city.sendKeys(getPosition().get("city"));
-//        return this;
-//    }
-//
-//    public CareersNewPosition selectState() throws FileNotFoundException {
-//        forSelectByValue(state, getPosition().get("state"));
-//        return this;
-//    }
-//
-//    public CareersNewPosition fillZip() throws FileNotFoundException {
-//        zip.sendKeys(getPosition().get("zip"));
-//        return this;
-//    }
-//
-//    public CareersNewPosition fillDate() {
-//        click(dateOpen);
-//        click(today);
-//        return this;
-//    }
 
     public CareersNewPosition submit() {
         click(submit);

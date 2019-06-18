@@ -4,6 +4,8 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class CareersHome extends Page {
 
     public CareersHome() {
@@ -13,14 +15,14 @@ public class CareersHome extends Page {
     @FindBy(xpath = "//a[@href='/login']")
     private WebElement loginButton;
 
-    @FindBy(xpath = "//a[text()='Owen Kelley']")
-    private WebElement nameRecruter;
+    @FindBy(xpath = "//span[@class='logout-box']/a")
+    private WebElement nameUser;
 
     @FindBy(xpath = "//button[contains(text(),'Recruit')]")
     private WebElement recruit;
 
-    @FindBy(xpath = "//a[contains(@href, 'new_candidate')]")
-    private WebElement apply;
+    @FindBy(xpath = "//li[contains(@style,'z-index: 0')]//h4")
+    private WebElement lastPosition;
 
 
     public CareersLogin clickLogin() {
@@ -29,12 +31,17 @@ public class CareersHome extends Page {
     }
 
     public String getUserName() {
-        return nameRecruter.getText();
+        return nameUser.getText();
     }
 
     public CareersRecruit clickRecruit() {
         click(recruit);
         return new CareersRecruit();
+    }
+
+    public CareersPositionDetails clickLastPosition() {
+        click(lastPosition);
+        return new CareersPositionDetails();
     }
 
 

@@ -29,6 +29,9 @@ public class CareersPositionDetails extends Page {
     @FindBy(xpath = "//label[@for='positionDateOpen']/../div/span")
     private WebElement date;
 
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement apply;
+
     public String getDetails() {
         return results.getText();
     }
@@ -61,6 +64,9 @@ public class CareersPositionDetails extends Page {
         return date.getText();
     }
 
-
+    public CareersNewPosition clickApply() {
+        click(apply);
+        return new CareersNewPosition();
+    }
 
 }

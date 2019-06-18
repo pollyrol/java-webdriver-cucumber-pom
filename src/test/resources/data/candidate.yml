@@ -1,0 +1,16 @@
+firstName: Ivan
+middleName: Ivanovich
+lastName: Ivanov
+name: Ivan Ivanovich Ivanov
+email: ivanov9@gmail.com
+password: ivan12345
+confirmPassword: ivan12345
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+address: 4970 El Camino Real
+city: Los Altos
+state: CA
+zip: "94022"
