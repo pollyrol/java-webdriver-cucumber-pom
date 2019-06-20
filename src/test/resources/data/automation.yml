@@ -1,8 +1,7 @@
 title: Jr SDET
 description: This position requires knowledge in the application of software testing methodologies. Python programming experience is strongly desired.
-street: "555 El Murid Real #987"
+address: "555 El Murid Real #987"
 zip: "66666"
 city: New Folsom
-state: Kansas
-stateValue: KS
+state: KS
 dateOpen: "06/06/2666"
